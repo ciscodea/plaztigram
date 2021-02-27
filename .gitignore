@@ -5,7 +5,16 @@
 *.pyc
 __pycache__
 db.sqlite3
-media
+
+# JPEG
+*.jpg
+*.jpeg
+*.jpe
+*.jif
+*.jfif
+*.jfi
+
+
 
 # Enviroments 
 
