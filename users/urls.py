@@ -7,15 +7,6 @@ from users import views
 
 
 urlpatterns = [
-
-    # Posts
-    path(
-        route='profile/<str:username>/',
-        view=TemplateView.as_view(template_name='users/detail.html'),
-        name='detail'
-    ),
-  
-
     # Management
     path(
         route='users/login/',
@@ -36,6 +27,14 @@ urlpatterns = [
         route='users/me/profile/',
         view=views.update_profile,
         name='update_profile'
-    )
+    ),
+
+    # Posts
+    path(
+        route='profile/<str:username>/',
+        view=TemplateView.as_view(template_name='users/detail.html'),
+        name='detail'
+    ),
+  
 
 ]
