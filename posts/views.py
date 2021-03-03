@@ -11,10 +11,6 @@ from posts.forms import PostForm
 from users.models import Profile
 from posts.models import Post
 
-# Utilities
-from datetime import datetime
-
-
 @login_required
 def list_posts(request):
     """List existing posts."""
@@ -28,7 +24,7 @@ def create_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('feed')
+            return redirect('posts:feed')
     else:
         form = PostForm()
     return render(request=request, template_name='posts/new.html', context={'form':form, 'user': request.user, 'profile': request.user.profile})
