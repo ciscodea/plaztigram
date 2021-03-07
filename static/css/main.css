@@ -44,3 +44,14 @@ html, body {
     background: #fff;
 }
 
+.comment-user a{
+
+    color: #262626;
+    text-decoration: none;
+}
+.comment-user a:hover{
+    
+    color: #1d5e72;
+
+}
+

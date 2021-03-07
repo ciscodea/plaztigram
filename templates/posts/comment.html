@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>Platzigram | Comments</title>
+{% endblock%}
+
+{% block container %}
+    <div class="container">
+        <div class="row">
+            {% include "posts/post_card.html" %}
+
+            <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0">
+                <form class="form-control" method="POST">
+                {% csrf_token %}
+
+                <input type="hidden" name="user" value="{{user.pk}}" />
+                <input type ="hidden" name="profile" value="{{ profile.pk }}" />
+                <input type="hidden" name="post" value ="{{post.pk}}"/>
+                
+                <div class="form-group">
+                    <input name="text" type="text" class="form-control" placeholder="Comment">
+                </div>
+                <button class="btn btn-primary btn-block mt-5" type="submit" value="{{post}}">Add Comment</button>
+            </form>
+            </div>        
+        </div>
+    </div>
+    
+{% endblock %}
+
+
+

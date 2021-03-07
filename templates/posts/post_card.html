@@ -1,3 +1,4 @@
+<!--Post title -->
 <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
     <div class="media pt-3 pl-3 pb-1">
         <a href="{% url "users:detail" post.user.username %}">
@@ -8,8 +9,10 @@
         </div>
     </div>
 
+    <!-- Post Image -->
     <img style="width: 100%;" src="{{ post.photo.url }}" alt="{{ post.title }}">
 
+    <!-- Posts Details -->
     <p class="mt-1 ml-2" >
         <a href="" style="color: #000; font-size: 20px;">
             <i class="far fa-heart"></i>
@@ -18,4 +21,29 @@
     <p class="ml-2 mt-0 mb-2">
         <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
     </p>
+    
+    <!-- Comments to post -->
+    {% for comment in post.comments.all %}
+        <div class="ml-2 mt-0 mb-2 comment-box">
+            <div class="container user-comment-box">
+            <h6 class="comment-user"> 
+                <b>
+                    <a href="{% url "users:detail" comment.user.username %}">
+                        <img class="mr-3 rounded-circle" height="35" width="35" src="{{ comment.profile.picture.url }}" alt="{{ comment.user.get_full_name }}">
+                    {{comment.user}}
+                    </a>
+                </b>
+            </h6>
+                <p>{{ comment.text }}</p>
+            </div>
+        </div>
+
+    {% empty %}
+        <p>No comments here yet :(</p>
+    {% endfor %}
+
+    <p class="ml-2 mt-0 mb-2">
+    <a href="{%url 'posts:comment' post.pk%}">Add comment</a>
+    </p>
+    
 </div>
