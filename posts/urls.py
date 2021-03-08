@@ -28,4 +28,9 @@ urlpatterns = [
         view=views.CreateCommentView.as_view(),
         name ='comment'
     ),
+     path(
+        route='like_post/<int:pk>/',
+        view=views.LikeView,
+        name ='like_post'
+    ),
 ]

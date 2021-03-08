@@ -1,8 +1,9 @@
 # Django
-from django.urls import  reverse_lazy
+from django.urls import  reverse_lazy, reverse
 from django.views.generic import DetailView, ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 
 #Forms
 from posts.forms import PostForm, CommentForm
@@ -11,6 +12,10 @@ from posts.forms import PostForm, CommentForm
 
 from posts.models import Post, Comment
 
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('posts:feed'))
 
 
 class PostsFeedView(LoginRequiredMixin, ListView):
@@ -47,7 +52,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 class CreateCommentView(LoginRequiredMixin, CreateView):
     # Create a ew Post
-    template_name = 'posts/comment.html'
+    template_name = 'posts/add_comment.html'
     form_class = CommentForm
     queryset = Post.objects.all()
     success_url = reverse_lazy('posts:feed')
