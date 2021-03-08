@@ -9,7 +9,7 @@
 <div class="container">
 
     <div class="row justify-content-md-center">
-        <div class="col-6 p-4" id="profile-box">
+        <div class="col-lg-6 col-xs-12 p-4" id="profile-box">
 
             <form action="{%url 'users:update_profile' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -19,9 +19,9 @@
                 
                 <div class='media'>
                 {%if profile.picture %}
-                    <img src="{{profile.picture.url}}" class="rounded-circle" height="50"/>
+                    <img src="{{profile.picture.url}}" class="rounded-circle" height="50" width="50"/>
                 {%else%}
-                    <img src="" class="rounded-circle" height="50"/>
+                    <img src="" class="rounded-circle" height="50" width="50"/>
                 {%endif%}  
                     <div class="media-body">
                         <h5 class="ml-4">@{{ user.username }} | {{user.get_full_name}}</h5>

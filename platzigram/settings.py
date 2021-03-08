@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7bxowrey*hpv*fymu09zdj2!s38=ud%oq(w3)8$vqnh1wy!ryd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'platzigram.middleware.ProfileCompletionMiddleware',
+
+    # Deployment only
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
@@ -76,23 +78,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'platzigram.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-import dj_database_url
-from decouple import config
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+
+# Deployment only
+#import dj_database_url
+#from decouple import config
+
+#DATABASES = {
+#    'default': dj_database_url.config(
+#        default=config('DATABASE_URL')
+#    )
+#}
 
 
 # Password validation
@@ -133,6 +136,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR / 'static',)
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -142,28 +146,29 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = LOGIN_URL
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Deployment only
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Clodinary for storage images
+
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-"""
+
 cloudinary.config( 
   cloud_name = "he9xujseo", 
   api_key = "254211853684524", 
   api_secret = "SrF6WiXygiXs3UpkHH-hk8iIFAc" 
 )
-"""
 
 #For deployment purposes
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'he9xujseo',
-    'API_KEY': '254211853684524',
-    'API_SECRET': 'SrF6WiXygiXs3UpkHH-hk8iIFAc',
-}
+#CLOUDINARY_STORAGE = {
+#    'CLOUD_NAME': 'he9xujseo',
+#    'API_KEY': '254211853684524',
+#    'API_SECRET': 'SrF6WiXygiXs3UpkHH-hk8iIFAc',
+#}
