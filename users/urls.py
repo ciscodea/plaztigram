@@ -8,7 +8,7 @@ from users import views
 urlpatterns = [
     # Management
     path(
-        route='users/login/',
+        route='',
         view=views.LoginView.as_view(),
         name='login'
     ),
