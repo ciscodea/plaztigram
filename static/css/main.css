@@ -10,12 +10,11 @@ html, body {
     border: 1px solid #e6e6e6;
     border-radius: 1px;
 }
-
-#main-navbar {
-    background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.0975);
+.navbar-custom {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0, 0, 0, 0.125);
 }
-
 .post-container {
     background: #fff;
     border: 1px solid #e6e6e6;
